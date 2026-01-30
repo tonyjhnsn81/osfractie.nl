@@ -14,18 +14,16 @@
         .animate-float { animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
         .sticky-sidebar { top: 5rem; height: calc(100vh - 6rem); overflow-y: auto; }
-        .content-section h2 { font-size: 1.875rem; font-weight: 900; color: #0f172a; margin-top: 2.5rem; margin-bottom: 1.25rem; line-height: 1.2; }
-        .content-section h3 { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
-        .content-section p { margin-bottom: 1.25rem; color: #475569; line-height: 1.7; }
+        .content-section h2 { font-size: 1.875rem; font-weight: 900; margin-top: 2.5rem; margin-bottom: 1.25rem; color: #0f172a; border-left: 4px solid #10b981; padding-left: 1rem; }
+        .content-section h3 { font-size: 1.5rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem; color: #1e293b; }
+        .content-section p { margin-bottom: 1.25rem; line-height: 1.75; color: #475569; }
         .content-section ul { margin-bottom: 1.5rem; list-style-type: none; }
         .content-section ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; color: #475569; }
         .content-section ul li::before { content: "→"; position: absolute; left: 0; color: #10b981; font-weight: bold; }
-        .custom-table-container { overflow-x: auto; margin: 2rem 0; border-radius: 0.75rem; border: 1px solid #e2e8f0; }
-        .custom-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem; }
-        .custom-table th { background-color: #f8fafc; padding: 1rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
-        .custom-table td { padding: 1rem; border-bottom: 1px solid #e2e8f0; color: #475569; }
-        .faq-item { border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0; }
-        .faq-question { font-weight: 900; color: #0f172a; margin-bottom: 0.5rem; display: block; }
+        .custom-table-wrapper { overflow-x: auto; margin: 2rem 0; border-radius: 0.75rem; border: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem; }
+        th { background-color: #f8fafc; padding: 1rem; font-weight: 700; color: #0f172a; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 1rem; border-bottom: 1px solid #e2e8f0; color: #475569; }
     </style>
     <script type="application/ld+json">
     {
@@ -38,25 +36,20 @@
         "name": "James Sterling"
       },
       "datePublished": "2026-01-30",
-      "publisher": {
-        "@type": "Organization",
-        "name": "CasinoPro",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://osfractie.nl/logo.png"
-        }
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://osfractie.nl"
       }
     }
     </script>
 </head>
 <body class="bg-slate-50 text-slate-900">
-
     <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-4 z-50 shadow-2xl border-t border-slate-700">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <p class="text-sm text-slate-300">We gebruiken cookies om ervoor te zorgen dat u de beste ervaring op onze website krijgt. Door verder te gaan, gaat u akkoord met ons privacybeleid.</p>
+            <p class="text-sm text-slate-300">We use cookies to ensure you get the best experience on our website. By continuing, you agree to our privacy policy.</p>
             <div class="flex gap-3">
-                <button onclick="document.getElementById('cookie-banner').style.display='none'" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 font-bold rounded text-sm transition-colors">Accepteren</button>
-                <button onclick="document.getElementById('cookie-banner').style.display='none'" class="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded text-sm transition-colors">Weigeren</button>
+                <button onclick="document.getElementById('cookie-banner').style.display='none'" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 font-bold rounded text-sm transition-colors">Accept</button>
+                <button onclick="document.getElementById('cookie-banner').style.display='none'" class="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded text-sm transition-colors">Decline</button>
             </div>
         </div>
     </div>
@@ -67,10 +60,10 @@
                 <i data-lucide="shield-check" class="text-emerald-500"></i>CASINO<span class="text-emerald-500">PRO</span>
             </div>
             <nav class="hidden md:flex gap-6 font-bold text-sm uppercase tracking-wide">
-                <a href="#" class="hover:text-emerald-400 transition-colors">Casino's</a>
-                <a href="#" class="hover:text-emerald-400 transition-colors">Slots</a>
-                <a href="#" class="hover:text-emerald-400 transition-colors">Bonussen</a>
-                <a href="#" class="hover:text-emerald-400 transition-colors">Nieuws</a>
+                <a href="#list" class="hover:text-emerald-400 transition-colors">Casinos</a>
+                <a href="#licenties" class="hover:text-emerald-400 transition-colors">Licenties</a>
+                <a href="#bonussen" class="hover:text-emerald-400 transition-colors">Bonussen</a>
+                <a href="#faq" class="hover:text-emerald-400 transition-colors">FAQ</a>
             </nav>
             <div class="flex items-center gap-4">
                 <button class="p-2 hover:bg-slate-800 rounded-full transition-colors"><i data-lucide="search" class="w-5 h-5"></i></button>
@@ -79,10 +72,10 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700 p-4">
             <nav class="flex flex-col gap-4 font-bold">
-                <a href="#" class="py-2 border-b border-slate-700">Casino's</a>
-                <a href="#" class="py-2 border-b border-slate-700">Slots</a>
-                <a href="#" class="py-2 border-b border-slate-700">Bonussen</a>
-                <a href="#" class="py-2">Nieuws</a>
+                <a href="#list" class="py-2 border-b border-slate-700">Casinos</a>
+                <a href="#licenties" class="py-2 border-b border-slate-700">Licenties</a>
+                <a href="#bonussen" class="py-2 border-b border-slate-700">Bonussen</a>
+                <a href="#faq" class="py-2">FAQ</a>
             </nav>
         </div>
     </header>
@@ -90,12 +83,12 @@
     <main class="container mx-auto px-4 py-8">
         <div class="mb-8">
             <nav class="flex text-xs text-slate-500 gap-2 mb-4 uppercase font-bold">
-                <span>Home</span><span>/</span><span>Reviews</span><span>/</span><span class="text-emerald-600">Beste illegale casinos</span>
+                <span>Home</span><span>/</span><span>Reviews</span><span>/</span><span class="text-emerald-600">Beste Illegale Casinos</span>
             </nav>
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight">Beste illegale casinos voor Nederlandse spelers in 2026</h1>
             <div class="flex items-center gap-4 text-sm text-slate-500 italic">
                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" class="w-8 h-8 rounded-full border border-slate-200" alt="Author">
-                <span>Door James Sterling • Bijgewerkt 30 jan 2026</span>
+                <span>By James Sterling • Updated Jan 30, 2026</span>
             </div>
         </div>
 
@@ -104,95 +97,136 @@
                 <div class="sticky-sidebar bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
                     <h3 class="font-black text-sm uppercase mb-4 text-slate-400">Inhoudsopgave</h3>
                     <ul class="space-y-3 text-sm font-bold">
-                        <li class="text-emerald-600"><a href="#intro" class="hover:underline">Introductie</a></li>
+                        <li class="text-emerald-600"><a href="#list" class="hover:underline">Top 3 Casinos</a></li>
                         <li><a href="#wat-is" class="hover:text-emerald-600 transition-colors">Wat is een illegaal casino?</a></li>
                         <li><a href="#waarom" class="hover:text-emerald-600 transition-colors">Waarom zonder Cruks?</a></li>
-                        <li><a href="#licenties" class="hover:text-emerald-600 transition-colors">Licenties & Toezicht</a></li>
+                        <li><a href="#licenties" class="hover:text-emerald-600 transition-colors">Licenties Overzicht</a></li>
                         <li><a href="#veiligheid" class="hover:text-emerald-600 transition-colors">Veiligheid & Risico's</a></li>
                         <li><a href="#faq" class="hover:text-emerald-600 transition-colors">Veelgestelde Vragen</a></li>
                     </ul>
                     <div class="mt-8 p-4 bg-emerald-50 rounded-lg border border-emerald-100">
                         <div class="text-emerald-800 font-black mb-2">Casino van de Maand</div>
-                        <img src="https://images.unsplash.com/photo-1518893063132-36e46dbe2496?w=400&h=250&fit=crop" class="rounded mb-3" alt="Promo">
-                        <div class="text-lg font-black leading-tight mb-2">BetRoyal Elite</div>
-                        <button class="w-full py-2 bg-emerald-600 text-white rounded font-bold text-sm">Claim €5000</button>
+                        <div class="text-lg font-black leading-tight mb-2">Goldbet</div>
+                        <p class="text-xs text-slate-600 mb-3">Exclusieve 300% bonus voor nieuwe spelers uit Nederland.</p>
+                        <a href="#" rel="nofollow" class="block w-full py-2 bg-emerald-600 text-white text-center rounded font-bold text-sm">Claim Bonus</a>
                     </div>
                 </div>
             </aside>
 
-            <section class="lg:col-span-9">
-                <div id="intro" class="content-section">
-                    <p class="text-lg font-medium text-slate-700 mb-6">Nederlandse spelers die zoeken naar beste illegale casinos ervaren vaak dezelfde knelpunten binnen het gereguleerde aanbod. Uitsluiting via Cruks, verplichte speellimieten en strikte controles zorgen voor een gevoel van verlies aan autonomie. Voor sommige spelers voelt spelen bij legale Nederlandse online casino's daardoor minder flexibel dan verwacht.</p>
-                    <p>Tegelijk ontstaat onzekerheid zodra de blik naar online casino’s in het buitenland gaat. Vragen over betrouwbaarheid, uitbetalingen en bescherming spelen een grote rol. Veel spelers willen vrijheid en eenvoud, maar niet tegen elke prijs. Deze pagina schetst het bredere kader waarin illegale online casino’s in 2026 worden gezocht.</p>
+            <section id="list" class="lg:col-span-9 space-y-4">
+                <div class="content-section">
+                    <p>Nederlandse spelers die zoeken naar beste illegale casinos ervaren vaak dezelfde knelpunten binnen het gereguleerde aanbod. Uitsluiting via Cruks, verplichte speellimieten en strikte controles zorgen voor een gevoel van verlies aan autonomie. Voor sommige spelers voelt spelen bij legale Nederlandse online casino's daardoor minder flexibel dan verwacht.</p>
+                    <p>Tegelijk ontstaat onzekerheid zodra de blik naar online casino’s in het buitenland gaat. Vragen over betrouwbaarheid, uitbetalingen en bescherming spelen een grote rol. Veel spelers willen vrijheid en eenvoud, maar niet tegen elke prijs.</p>
+                    <p>Deze pagina schetst het bredere kader waarin illegale online casino’s in 2026 worden gezocht. De focus ligt op verwachtingen, spanningsvelden en afwegingen die Nederlandse spelers maken. Zonder aannames, zonder beloftes, maar met aandacht voor realistische zorgen.</p>
                 </div>
 
                 <div class="bg-emerald-600 text-white p-4 rounded-xl flex items-center justify-between mb-8 shadow-lg animate-float">
                     <div class="flex items-center gap-3">
                         <i data-lucide="award" class="w-8 h-8"></i>
                         <div>
-                            <div class="font-black uppercase text-sm">Exclusieve Aanbieding</div>
-                            <div class="text-lg font-bold">300% Bonus voor Nieuwe Spelers</div>
+                            <div class="font-black uppercase text-sm">Aanbevolen Optie</div>
+                            <div class="text-lg font-bold">Exclusieve Bonussen voor 2026</div>
                         </div>
                     </div>
-                    <button class="px-6 py-2 bg-white text-emerald-600 rounded-full font-black text-sm hover:bg-slate-100 transition-colors shadow-md">NU SPELEN</button>
+                    <a href="#" rel="nofollow" class="px-6 py-2 bg-white text-emerald-600 rounded-full font-black text-sm hover:bg-slate-100 transition-colors shadow-md">BEKIJK NU</a>
                 </div>
 
-                <div class="space-y-4 mb-12">
-                    <!-- Casino Card 1 -->
+                <div class="space-y-4">
+                    <!-- Casino Card 1: Goldbet -->
                     <div class="casino-card bg-white border border-slate-200 rounded-2xl p-4 md:p-6 transition-all duration-300 flex flex-col md:flex-row items-center gap-6 shadow-sm">
                         <div class="w-32 h-32 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-100 shrink-0">
                             <i data-lucide="zap" class="w-12 h-12 text-emerald-500"></i>
                         </div>
                         <div class="flex-grow text-center md:text-left">
                             <div class="flex flex-col md:flex-row items-center gap-3 mb-2">
-                                <h3 class="text-2xl font-black m-0">Ignition Casino</h3>
+                                <h3 class="text-2xl font-black">Goldbet</h3>
                                 <div class="flex text-yellow-400">
-                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                                 </div>
                             </div>
-                            <p class="text-slate-500 text-sm mb-4">Beste voor high-stakes poker en snelle crypto uitbetalingen.</p>
+                            <p class="text-slate-500 text-sm mb-4">Hoogste bonussen en snelste crypto uitbetalingen voor Nederlanders.</p>
                             <div class="grid grid-cols-2 gap-4 text-xs font-bold uppercase text-slate-400">
-                                <div class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> 24u Uitbetaling</div>
-                                <div class="flex items-center gap-1"><i data-lucide="smartphone" class="w-3 h-3"></i> Mobiel Gereed</div>
+                                <div class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> Directe Payout</div>
+                                <div class="flex items-center gap-1"><i data-lucide="smartphone" class="w-3 h-3"></i> No Cruks</div>
                             </div>
                         </div>
                         <div class="text-center shrink-0 border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-6 w-full md:w-auto">
-                            <div class="text-xs font-black text-slate-400 uppercase">Welkomstbonus</div>
+                            <div class="text-xs font-black text-slate-400 uppercase">Welcome Bonus</div>
                             <div class="text-2xl font-black text-emerald-600 mb-4">300% TOT €3,000</div>
-                            <button class="w-full md:w-48 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-black text-lg transition-all shadow-lg">SPEEL NU</button>
+                            <a href="#" rel="nofollow" class="inline-block w-full md:w-48 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-black text-lg transition-all shadow-lg hover:shadow-emerald-200">SPEEL NU</a>
                         </div>
                     </div>
 
-                    <!-- Casino Card 2 -->
+                    <!-- Casino Card 2: Newlucky -->
                     <div class="casino-card bg-white border border-slate-200 rounded-2xl p-4 md:p-6 transition-all duration-300 flex flex-col md:flex-row items-center gap-6 shadow-sm">
                         <div class="w-32 h-32 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-100 shrink-0">
                             <i data-lucide="flame" class="w-12 h-12 text-orange-500"></i>
                         </div>
                         <div class="flex-grow text-center md:text-left">
                             <div class="flex flex-col md:flex-row items-center gap-3 mb-2">
-                                <h3 class="text-2xl font-black m-0">BetOnline.ag</h3>
+                                <h3 class="text-2xl font-black">Newlucky</h3>
                                 <div class="flex text-yellow-400">
-                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star-half" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star-half" class="w-4 h-4 fill-current"></i>
                                 </div>
                             </div>
-                            <p class="text-slate-500 text-sm mb-4">Enorme selectie live dealer spellen en sportweddenschappen.</p>
+                            <p class="text-slate-500 text-sm mb-4">Enorm aanbod aan slots en live dealer games zonder beperkingen.</p>
                             <div class="grid grid-cols-2 gap-4 text-xs font-bold uppercase text-slate-400">
-                                <div class="flex items-center gap-1"><i data-lucide="badge-check" class="w-3 h-3"></i> Gelicentieerd</div>
-                                <div class="flex items-center gap-1"><i data-lucide="coins" class="w-3 h-3"></i> Crypto Opties</div>
+                                <div class="flex items-center gap-1"><i data-lucide="badge-check" class="w-3 h-3"></i> EU Licentie</div>
+                                <div class="flex items-center gap-1"><i data-lucide="coins" class="w-3 h-3"></i> iDEAL Opties</div>
                             </div>
                         </div>
                         <div class="text-center shrink-0 border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-6 w-full md:w-auto">
                             <div class="text-xs font-black text-slate-400 uppercase">Free Spins</div>
-                            <div class="text-2xl font-black text-emerald-600 mb-4">100 GRATIS SPINS</div>
-                            <button class="w-full md:w-48 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-black text-lg transition-all shadow-lg">SPEEL NU</button>
+                            <div class="text-2xl font-black text-emerald-600 mb-4">100 FREE SPINS</div>
+                            <a href="#" rel="nofollow" class="inline-block w-full md:w-48 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-black text-lg transition-all shadow-lg hover:shadow-emerald-200">SPEEL NU</a>
+                        </div>
+                    </div>
+
+                    <!-- Casino Card 3: Lizaro -->
+                    <div class="casino-card bg-white border border-slate-200 rounded-2xl p-4 md:p-6 transition-all duration-300 flex flex-col md:flex-row items-center gap-6 shadow-sm">
+                        <div class="w-32 h-32 bg-slate-100 rounded-xl flex items-center justify-center border border-slate-100 shrink-0">
+                            <i data-lucide="gem" class="w-12 h-12 text-blue-500"></i>
+                        </div>
+                        <div class="flex-grow text-center md:text-left">
+                            <div class="flex flex-col md:flex-row items-center gap-3 mb-2">
+                                <h3 class="text-2xl font-black">Lizaro</h3>
+                                <div class="flex text-yellow-400">
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4"></i>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm mb-4">De standaard voor VIP spelers en hoge inzet limieten.</p>
+                            <div class="grid grid-cols-2 gap-4 text-xs font-bold uppercase text-slate-400">
+                                <div class="flex items-center gap-1"><i data-lucide="gift" class="w-3 h-3"></i> VIP Program</div>
+                                <div class="flex items-center gap-1"><i data-lucide="shield" class="w-3 h-3"></i> SSL Secure</div>
+                            </div>
+                        </div>
+                        <div class="text-center shrink-0 border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-6 w-full md:w-auto">
+                            <div class="text-xs font-black text-slate-400 uppercase">Crypto Bonus</div>
+                            <div class="text-2xl font-black text-emerald-600 mb-4">€7,500 PAKKET</div>
+                            <a href="#" rel="nofollow" class="inline-block w-full md:w-48 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-black text-lg transition-all shadow-lg hover:shadow-emerald-200">SPEEL NU</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="content-section">
+                <article class="content-section mt-12 bg-white p-6 md:p-10 rounded-2xl border border-slate-200 shadow-sm">
                     <h2>Illegale online casino’s in Nederland in 2026</h2>
                     <p>Voor veel Nederlandse spelers roept gokken buiten het gereguleerde aanbod vragen en twijfels op. De term beste illegale casinos verschijnt vaak in zoekopdrachten van spelers die zich buitengesloten voelen door Cruks en strikte speellimieten. Tegelijk leeft de wens om te spelen bij een casino zonder Cruks kiezen, met meer flexibiliteit en minder directe controle.</p>
-                    <p>Veelgenoemde pijnpunten zijn:</p>
+                    <p>Deze gids geeft context bij wat spelers bedoelen met een illegale casino of online casino zonder Cruks, en waarom deze opties aandacht krijgen in 2026. De focus ligt op bewustwording: welke voordelen spelers verwachten, maar ook welke risico’s daarbij horen. Verwarring over regels, toezicht en betrouwbaarheid speelt hierbij een centrale rol, zeker buiten het bereik van de Nederlandse Kansspelautoriteit.</p>
+                    <p>De informatie is bedoeld om Nederlandse spelers te helpen begrijpen waar zij tegenaan lopen en welke afwegingen vaak worden gemaakt. Dit is geen juridisch advies. De verantwoordelijkheid voor keuzes en risico’s ligt altijd bij de speler zelf.</p>
+                    
+                    <p><strong>Veelgenoemde pijnpunten zijn:</strong></p>
                     <ul>
                         <li>Cruks-blokkade zonder eenvoudige uitweg</li>
                         <li>Strikte stortings- en speellimieten</li>
@@ -203,13 +237,22 @@
 
                     <h2 id="wat-is">Wat is een illegaal online casino precies?</h2>
                     <p>Een illegaal online casino wordt vanuit Nederlands perspectief bepaald door vergunning en doelgroep. Het gaat om goksites zonder Nederlandse vergunning die toch actief Nederlandse spelers accepteren. Volgens de regels voor online gokken Nederland mogen alleen aanbieders met toestemming van de Kansspelautoriteit hun diensten op de Nederlandse markt aanbieden.</p>
-                    <p>Dit betekent niet dat een illegaal online casino per definitie zonder vergunning opereert. Veel van deze aanbieders beschikken over een buitenlandse licentie, bijvoorbeeld uit Curaçao of Malta. In het land van afgifte kunnen zij legaal opereren, maar zonder Nederlandse vergunning zijn zij in Nederland niet toegestaan.</p>
+                    <p>Dit betekent niet dat een illegaal online casino per definitie zonder vergunning opereert. Veel van deze aanbieders beschikken over een buitenlandse licentie, bijvoorbeeld uit Curaçao of Malta. In het land van afgifte kunnen zij legaal opereren, maar zonder Nederlandse vergunning zijn zij in Nederland niet toegestaan. Daarmee ontstaat het onderscheid tussen illegaal volgens Nederlandse wet en juridisch toegestaan in een ander rechtsgebied.</p>
+                    <p>Het verschil met legale Nederlandse casino’s zit vooral in toezicht en bescherming. Nederlandse aanbieders vallen onder strikte regels rond Cruks, limieten en zorgplicht bij legale Nederlandse goksites vergelijken. Bij buitenlandse casino’s ontbreekt deze verplichting richting Nederlandse spelers, ook al zijn zij elders gereguleerd.</p>
+                    <p>De term illegaal zorgt daarom vaak voor verwarring. Het verwijst niet altijd naar fraude of oplichting, maar naar het ontbreken van goedkeuring door de Kansspelautoriteit voor online gokken in Nederland. Dat maakt de positie van de speler wezenlijk anders dan bij een gereguleerd aanbod.</p>
 
                     <h2>Hoe Cruks en de KSA illegale casino’s definiëren</h2>
-                    <p>Cruks staat voor het Centraal Register Uitsluiting Kansspelen en vormt een kernonderdeel van het Nederlandse beschermingsbeleid. Via een Cruks registratie worden spelers tijdelijk of langdurig uitgesloten van deelname aan legale kansspelen. De handhaving van deze regels ligt bij de Nederlandse Kansspelautoriteit, die toezicht houdt op naleving van de Wet kansspelen.</p>
+                    <p>Cruks staat voor het Centraal Register Uitsluiting Kansspelen en vormt een kernonderdeel van het Nederlandse beschermingsbeleid. Via een Cruks registratie worden spelers tijdelijk of langdurig uitgesloten van deelname aan legale kansspelen. Deze maatregel is bedoeld om risico’s op problematisch speelgedrag te beperken.</p>
+                    <p>De handhaving van deze regels ligt bij de Nederlandse Kansspelautoriteit, die toezicht houdt op naleving van de Wet kansspelen. Een aanbieder komt in beeld wanneer het aanbod duidelijk is gericht op de Nederlandse markt. Denk aan Nederlandstalige websites, Nederlandse betaalmethoden of actieve marketing richting Nederlandse spelers. Ook een online casino zonder Cruks kan daardoor als illegaal worden aangemerkt.</p>
+                    <p>Veel spelers vragen zich af of zij persoonlijk boetes riskeren. In de praktijk richt handhaving door de Nederlandse Kansspelautoriteit zich vooral op aanbieders, niet op individuele spelers. Dat neemt niet weg dat spelen buiten het gereguleerde stelsel altijd juridische en financiële risico’s met zich meebrengt.</p>
 
                     <h2 id="waarom">Waarom kiezen spelers voor illegale casino’s en casino’s zonder Cruks?</h2>
-                    <p>De belangstelling voor een casino zonder Cruks komt voort uit een combinatie van praktische en emotionele factoren. Veel spelers ervaren het gereguleerde aanbod als beperkend door vaste limieten en intensieve controles.</p>
+                    <p>De belangstelling voor een casino zonder Cruks komt voort uit een combinatie van praktische en emotionele factoren. Veel spelers ervaren het gereguleerde aanbod als beperkend door vaste limieten en intensieve controles. Voor een deel van de markt voelt die bescherming als verlies van eigen regie.</p>
+                    <p>Een belangrijke groep bestaat uit spelers die zijn opgenomen in Cruks en daardoor geen toegang meer hebben tot een Cruks casino met Nederlandse vergunning. Voor deze groep leidt uitsluiting vaak tot frustratie en het gevoel buitenspel te staan. Tegelijk zoeken Nederlandse gokkers naar alternatieven die minder vragen stellen bij registratie en betalingen.</p>
+                    <p>Naast uitsluiting spelen ook inhoudelijke verschillen mee. Buiten het Nederlandse stelsel wordt een groter spelaanbod verwacht, met meer variatie in gokkasten en live spellen. Ook aantrekkelijke bonussen en het gebruik van crypto worden gezien als vormen van extra vrijheid, vooral bij een tweede of derde casino zonder Cruks.</p>
+                    <p>Die zoektocht gaat echter gepaard met innerlijke tegenstrijdigheden. Spelers willen controle terugpakken, maar ervaren tegelijk onzekerheid over betrouwbaarheid en zelfbeheersing. Angst om de grip te verliezen of later problemen te krijgen blijft vaak op de achtergrond aanwezig.</p>
+                    
+                    <p><strong>Veelgenoemde redenen om te kiezen voor een casino zonder Cruks zijn:</strong></p>
                     <ul>
                         <li>Uitsluiting via Cruks en geen toegang tot legale aanbieders</li>
                         <li>Strikte stortings- en speellimieten bij Nederlandse casino’s</li>
@@ -220,7 +263,11 @@
                     </ul>
 
                     <h2>Cruks omzeilen: wat zijn de gevolgen?</h2>
-                    <p>Wanneer spelers bewust Cruks omzeilen door uit te wijken naar illegale goksites, verdwijnt de beschermende laag volledig. Belangrijke risico’s bij het omzeilen van Cruks zijn:</p>
+                    <p>Cruks is opgezet als beschermingsinstrument voor spelers die tijdelijk afstand willen nemen van kansspelen. Het systeem ondersteunt een gokstop en helpt risico’s op problematisch gedrag te beperken. Wanneer spelers bewust Cruks omzeilen door uit te wijken naar illegale goksites, verdwijnt deze beschermende laag volledig.</p>
+                    <p>Spelen buiten toezicht vergroot de kans op problematisch gokgedrag. Zonder verplichte limieten of interventies ligt verlies van controle sneller op de loer. Financiële problemen kunnen zich daardoor ongemerkt opstapelen, vooral bij intensief of emotioneel gedreven speelgedrag.</p>
+                    <p>Dit artikel biedt informatie en context, maar is geen advies om Cruks te ontwijken. Het uitgangspunt blijft verantwoord gokken, ook wanneer spelers zoeken naar alternatieven buiten het gereguleerde aanbod. Bewustzijn van de gevolgen is daarbij essentieel.</p>
+                    
+                    <p><strong>Belangrijke risico’s bij het omzeilen van Cruks zijn:</strong></p>
                     <ul>
                         <li>Verlies van controle over speelgedrag</li>
                         <li>Oplopende financiële problemen</li>
@@ -230,7 +277,10 @@
                     </ul>
 
                     <h2 id="licenties">Meest voorkomende licenties bij illegale goksites</h2>
-                    <p>Illegale goksites die Nederlandse spelers accepteren, beschikken vaak over een buitenlandse vergunning. De meest voorkomende licenties zijn:</p>
+                    <p>Illegale goksites die Nederlandse spelers accepteren, opereren vaak niet zonder vergunning. In veel gevallen beschikken zij over een buitenlandse vergunning, afgegeven door toezichthouders buiten Nederland. Deze licenties bepalen het niveau van toezicht, transparantie en klachtenafhandeling, maar geven geen toestemming om actief op de Nederlandse markt te opereren.</p>
+                    <p>Voor spelers ontstaat hier regelmatig verwarring. Een vergunning wekt vertrouwen, terwijl het aanbod volgens Nederlandse regels alsnog als illegaal geldt. De rol van buitenlandse toezichthouders verschilt sterk per rechtsgebied en biedt geen uniforme bescherming.</p>
+                    
+                    <p><strong>De meest voorkomende licenties bij illegale online casino’s die Nederlanders accepteren zijn:</strong></p>
                     <ul>
                         <li>Curaçao Gaming Authority – veel gebruikt, laagdrempelig, beperkt toezicht</li>
                         <li>Malta Gaming Authority – strenger gereguleerd, sterkere reputatie binnen de EU</li>
@@ -240,29 +290,78 @@
                         <li>Costa Rica – vooral registratieland, zonder structureel toezicht</li>
                     </ul>
 
-                    <div class="custom-table-container">
-                        <table class="custom-table">
+                    <p>De belangrijkste verschillen tussen deze buitenlandse licenties zijn overzichtelijk samen te vatten in onderstaande tabel.</p>
+                    
+                    <div class="custom-table-wrapper">
+                        <table>
                             <thead>
                                 <tr>
-                                    <th>Licentie</th>
-                                    <th>Toezicht</th>
+                                    <th>Licentie / toezichthouder</th>
+                                    <th>Toezichtniveau</th>
                                     <th>Transparantie</th>
-                                    <th>Klachten</th>
+                                    <th>Klachtenroute</th>
                                     <th>Reputatie</th>
+                                    <th>Verificatie-eisen</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td>Curaçao</td><td>Laag–middel</td><td>Beperkt</td><td>Beperkt</td><td>Wisselend</td></tr>
-                                <tr><td>Malta (MGA)</td><td>Hoog</td><td>Hoog</td><td>Duidelijk</td><td>Sterk</td></tr>
-                                <tr><td>Kahnawake</td><td>Middel</td><td>Redelijk</td><td>Aanwezig</td><td>Redelijk</td></tr>
-                                <tr><td>Gibraltar</td><td>Hoog</td><td>Hoog</td><td>Formeel</td><td>Sterk</td></tr>
-                                <tr><td>Anjouan</td><td>Laag</td><td>Beperkt</td><td>Onzeker</td><td>Laag</td></tr>
-                                <tr><td>Costa Rica</td><td>Zeer laag</td><td>Zeer beperkt</td><td>Geen route</td><td>Zwak</td></tr>
+                                <tr>
+                                    <td>Curaçao Gaming Authority</td>
+                                    <td>Laag–middel</td>
+                                    <td>Beperkt</td>
+                                    <td>Beperkt</td>
+                                    <td>Wisselend</td>
+                                    <td>Vaak minimaal</td>
+                                </tr>
+                                <tr>
+                                    <td>Malta Gaming Authority</td>
+                                    <td>Hoog</td>
+                                    <td>Hoog</td>
+                                    <td>Duidelijk</td>
+                                    <td>Sterk</td>
+                                    <td>Strikt</td>
+                                </tr>
+                                <tr>
+                                    <td>Kahnawake Gaming Commission</td>
+                                    <td>Middel</td>
+                                    <td>Redelijk</td>
+                                    <td>Aanwezig</td>
+                                    <td>Redelijk</td>
+                                    <td>Gemiddeld</td>
+                                </tr>
+                                <tr>
+                                    <td>Gibraltar Gambling Commissioner</td>
+                                    <td>Hoog</td>
+                                    <td>Hoog</td>
+                                    <td>Formeel</td>
+                                    <td>Sterk</td>
+                                    <td>Strikt</td>
+                                </tr>
+                                <tr>
+                                    <td>Anjouan Gaming</td>
+                                    <td>Laag</td>
+                                    <td>Beperkt</td>
+                                    <td>Onzeker</td>
+                                    <td>Laag</td>
+                                    <td>Variabel</td>
+                                </tr>
+                                <tr>
+                                    <td>Costa Rica</td>
+                                    <td>Zeer laag</td>
+                                    <td>Zeer beperkt</td>
+                                    <td>Geen vaste route</td>
+                                    <td>Zwak</td>
+                                    <td>Nauwelijks</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h2>Zo controleer je de vergunning van een illegale casino site</h2>
+                    <p>Het controleren van een vergunning is een belangrijk kenmerk casino wanneer spelers risico’s willen beperken. Veel illegale aanbieders tonen licentielogo’s die vertrouwen moeten wekken, maar deze zijn niet altijd authentiek. Daarom is het essentieel om verder te kijken dan het logo alleen.</p>
+                    <p>Een betrouwbaar casino maakt duidelijk onder welke vergunning het opereert en verwijst naar een officiële toezichthouder. Spelers kunnen deze informatie zelf verifiëren via de website van de regulator. Zo wordt zichtbaar of een licentienummer geldig is en of de exploitant daadwerkelijk onder toezicht staat.</p>
+                    
+                    <p><strong>Volg deze stappen om een gokvergunning te controleren:</strong></p>
                     <ul>
                         <li>Controleer of het licentielogo zichtbaar en consistent wordt gebruikt</li>
                         <li>Zoek het bijbehorende licentienummer in de footer of algemene voorwaarden</li>
@@ -273,7 +372,10 @@
                     </ul>
 
                     <h2>Voordelen en risico’s van spelen bij illegale casino’s</h2>
-                    <h3 class="text-emerald-600">Vermeende voordelen:</h3>
+                    <p>Spelen bij een illegaal online casino wordt door sommige spelers gezien als een manier om beperkingen te omzeilen. De aantrekkingskracht zit vooral in de belofte van meer vrijheid, minder controle en snellere toegang tot spellen. Vooral wie kiest voor een online casino zonder Cruks verwacht een soepelere ervaring dan bij gereguleerde aanbieders.</p>
+                    <p>Tegelijk staat deze vrijheid tegenover duidelijke nadelen. Waar een betrouwbaar casino met Nederlandse vergunning bescherming biedt, ontbreekt die vangnetfunctie bij illegale aanbieders. Daardoor nemen onzekerheden rond uitbetalingen, voorwaarden en toezicht merkbaar toe.</p>
+                    
+                    <p><strong>Vermeende voordelen van illegale casino’s zijn onder meer:</strong></p>
                     <ul>
                         <li>Hogere en flexibelere bonussen, waaronder een aantrekkelijke welkomstbonus</li>
                         <li>Minder of geen vaste stortings- en speellimieten</li>
@@ -281,7 +383,8 @@
                         <li>Groter en internationaler spelaanbod</li>
                         <li>Mogelijkheid tot spelen met crypto</li>
                     </ul>
-                    <h3 class="text-red-600">Belangrijkste risico’s:</h3>
+
+                    <p><strong>Belangrijkste risico’s van illegaal gokken zijn:</strong></p>
                     <ul>
                         <li>Zwakker toezicht en beperkte afdwingbaarheid van regels</li>
                         <li>Risico op vertraagde of geweigerde snelle uitbetalingen</li>
@@ -292,8 +395,11 @@
                     </ul>
 
                     <h2>Illegale casino’s vergeleken met legale KSA-casino’s</h2>
-                    <div class="custom-table-container">
-                        <table class="custom-table">
+                    <p>Het verschil tussen illegale aanbieders en legale casino’s zit vooral in toezicht en bescherming. Spelers die overstappen, ruilen duidelijke waarborgen in voor meer vrijheid en minder controle. Dat maakt het lastig om vooraf te overzien wat men precies opgeeft.</p>
+                    <p>Legale online casino’s met een Nederlandse vergunning vallen onder strikte regels rond zorgplicht, limieten en verificatie. Illegale casino’s opereren buiten dit kader en bepalen grotendeels zelf hoe zij omgaan met spelersbescherming. Dat verschil raakt vrijwel elk onderdeel van de speelervaring.</p>
+                    
+                    <div class="custom-table-wrapper">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Criterium</th>
@@ -303,17 +409,24 @@
                             </thead>
                             <tbody>
                                 <tr><td>Toezicht</td><td>Buitenlands, wisselend</td><td>Nederlands, strikt</td></tr>
-                                <tr><td>Cruks</td><td>Niet verplicht</td><td>Verplicht</td></tr>
-                                <tr><td>Limieten</td><td>Vaak flexibel</td><td>Vast en gereguleerd</td></tr>
-                                <tr><td>Bonussen</td><td>Ruimer</td><td>Sterk begrensd</td></tr>
-                                <tr><td>KYC Controle</td><td>Vaak later</td><td>Altijd vooraf</td></tr>
-                                <tr><td>Zorgplicht</td><td>Eigen verantwoordelijkheid</td><td>Actieve zorgplicht</td></tr>
+                                <tr><td>Cruks-aansluiting</td><td>Niet verplicht</td><td>Verplicht</td></tr>
+                                <tr><td>Stortings- en speellimieten</td><td>Vaak flexibel of afwezig</td><td>Vast en gereguleerd</td></tr>
+                                <tr><td>Bonussen</td><td>Ruimer, minder beperkt</td><td>Sterk begrensd</td></tr>
+                                <tr><td>Identiteitscontrole (KYC)</td><td>Vaak later of beperkt</td><td>Altijd vooraf</td></tr>
+                                <tr><td>Verantwoord spelen</td><td>Eigen verantwoordelijkheid</td><td>Actieve zorgplicht</td></tr>
+                                <tr><td>Klachtenafhandeling</td><td>Via buitenlandse toezichthouder</td><td>Via KSA en geschillen</td></tr>
+                                <tr><td>Uitbetalingszekerheid</td><td>Afhankelijk van aanbieder</td><td>Wettelijk beschermd</td></tr>
+                                <tr><td>Verslavingsbescherming</td><td>Beperkt of afwezig</td><td>Structureel ingebouwd</td></tr>
                             </tbody>
                         </table>
                     </div>
 
                     <h2 id="veiligheid">Hoe veilig zijn illegale online casino’s in de praktijk?</h2>
-                    <p>Positieve veiligheidssignalen zijn onder meer:</p>
+                    <p>De veiligheid van illegale online casino’s verschilt sterk per aanbieder. Voor Nederlandse spelers draait het vooral om vertrouwen: komt geld terug bij winst en worden regels eerlijk toegepast. Zonder toezicht vanuit Nederland moeten spelers zelf beoordelen of veilig gokken in de praktijk haalbaar is.</p>
+                    <p>Betrouwbaarheid is vaak af te leiden uit concrete signalen. Transparante voorwaarden, bekende spelproviders en een bereikbare klantenservice wijzen op meer zorgvuldigheid. Ook betrouwbare betaalmethoden en consistente uitbetalingen dragen bij aan het gevoel van eerlijk spel.</p>
+                    <p>Tegelijk bestaan er duidelijke waarschuwingssignalen. Scam-sites maken misbruik van onduidelijkheid en spelen in op haast of hebzucht. Juist daar lopen spelers het grootste risico om geld te verliezen.</p>
+                    
+                    <p><strong>Positieve veiligheidssignalen zijn onder meer:</strong></p>
                     <ul>
                         <li>Actieve SSL-encryptie voor data en betalingen</li>
                         <li>Samenwerking met bekende en geteste spelproviders</li>
@@ -321,7 +434,8 @@
                         <li>Bereikbare klantenservice met vaste contactopties</li>
                         <li>Consistente en herhaalbare uitbetalingen</li>
                     </ul>
-                    <p>Rode vlaggen die extra voorzichtigheid vereisen:</p>
+
+                    <p><strong>Rode vlaggen die extra voorzichtigheid vereisen:</strong></p>
                     <ul>
                         <li>Ontbrekende of vage contactgegevens</li>
                         <li>Onduidelijke of tegenstrijdige voorwaarden</li>
@@ -331,7 +445,10 @@
                     </ul>
 
                     <h2>Zwarte lijst gokken: waar moet je voor oppassen?</h2>
-                    <p>Typische patronen bij malafide casino’s en scam goksites zijn:</p>
+                    <p>De term zwarte lijst gokken wordt gebruikt voor overzichten van casino’s met een structureel slechte reputatie. Het gaat vaak om aanbieders die uitbetalingen traineren, voorwaarden wijzigen na winst of werken met misleidende praktijken. Voor spelers is de angst groot om onbewust bij een scam-site terecht te komen.</p>
+                    <p>Dergelijke lijsten worden meestal samengesteld op basis van meldingen, klachten en langdurige patronen. Onafhankelijke reviewplatforms en klachtenfora bieden inzicht in terugkerende problemen, zoals klachten over uitbetalingen of onbereikbare klantenservice. Een betrouwbaar casino vertoont dit soort signalen doorgaans niet over langere tijd.</p>
+                    
+                    <p><strong>Typische patronen bij malafide casino’s en scam goksites zijn:</strong></p>
                     <ul>
                         <li>Vage of steeds veranderende voorwaarden</li>
                         <li>Herhaald verzoek om extra documenten bij uitbetaling</li>
@@ -341,17 +458,22 @@
                     </ul>
 
                     <h2>Hoe werkt spelen bij een illegale online casino stap voor stap</h2>
-                    <ul>
+                    <p>Voor veel Nederlandse spelers is het onduidelijk wat zij kunnen verwachten bij een online casino zonder Cruks. De eerste indruk is vaak eenvoud en snelheid, maar het speelproces verloopt anders dan bij een gereguleerd cruks casino. Juist die verschillen zorgen regelmatig voor verrassingen bij uitbetalingen.</p>
+                    <p>In vergelijking met Nederlandse aanbieders wordt bij inschrijving minder informatie gevraagd. Dat kan voelen als meer privacy, maar de controle verschuift meestal naar een later moment. Vooral bij een uitbetalingsaanvraag volgt alsnog verificatie, soms uitgebreider dan verwacht.</p>
+                    
+                    <ol class="list-decimal pl-6 space-y-3 mb-6 text-slate-600">
                         <li>Registratie met beperkte persoonsgegevens en snelle accountaanmaak</li>
                         <li>Geld storten via beschikbare betaalmethoden</li>
                         <li>Eventueel claimen van een bonus bij eerste storting</li>
                         <li>Spelen binnen het beschikbare spelaanbod</li>
                         <li>Indienen van een uitbetalingsaanvraag</li>
                         <li>Verificatie bij uitbetalen, inclusief identiteits- en betalingscontrole</li>
-                    </ul>
+                    </ol>
 
                     <h2>Betaalmethoden en uitbetalingen bij illegale casino’s</h2>
-                    <p>Veelgebruikte betaalroutes zijn:</p>
+                    <p>Bij illegale casino’s verschilt het betaalproces sterk per aanbieder. Voor spelers draait het om vertrouwen: worden gegevens veilig verwerkt en volgen snelle uitbetalingen zonder onverwachte kosten. In tegenstelling tot Nederlandse sites wordt iDEAL meestal niet officieel aangeboden; spelers wijken uit naar alternatieven.</p>
+                    
+                    <p><strong>Veelgebruikte betaalroutes zijn:</strong></p>
                     <ul>
                         <li>Creditcards (Visa, Mastercard)</li>
                         <li>E-wallets (bijvoorbeeld Skrill of Neteller)</li>
@@ -361,6 +483,10 @@
                     </ul>
 
                     <h2>Is spelen bij illegale casino’s legaal voor Nederlandse spelers?</h2>
+                    <p>De regels rond online gokken zijn vastgelegd in de wet kansspelen en de Wet kansspelen op afstand (KOA). Volgens deze wet mogen alleen aanbieders met een Nederlandse vergunning hun diensten aanbieden. Casino’s zonder vergunning handelen daarmee niet Nederland legaal, ook al beschikken zij over een buitenlandse licentie.</p>
+                    <p>Voor spelers ligt de situatie genuanceerder. De Nederlandse Kansspelautoriteit richt handhaving vooral op aanbieders, niet op individuele spelers. Toch betekent dat niet dat spelen zonder risico is. Wie deelneemt aan illegaal online gokken begeeft zich buiten het beschermde kader van de Nederlandse overheid.</p>
+                    
+                    <p><strong>Belangrijke kernpunten op een rij:</strong></p>
                     <ul>
                         <li>Aanbieders zonder vergunning handelen illegaal volgens Nederlandse wet</li>
                         <li>Spelers worden zelden direct beboet, maar lopen wel risico’s</li>
@@ -370,33 +496,38 @@
                     </ul>
 
                     <h2>Moet je belasting betalen over winsten bij illegale goksites?</h2>
-                    <ul>
-                        <li>Verschil tussen EU/EEA-casino’s en niet-EU aanbieders</li>
-                        <li>Algemene aangifteplicht als uitgangspunt</li>
-                        <li>Zelf administratie bijhouden van stortingen en winsten</li>
-                        <li>Informatie controleren bij de Belastingdienst of een fiscaal adviseur</li>
-                    </ul>
+                    <p>Belasting op winsten uit online gokken hangt samen met waar het casino juridisch is gevestigd. Voor Nederland legaal aanbod gelden andere regels dan voor buitenlandse aanbieders zonder Nederlandse vergunning. Bij illegale goksites spelen vooral verschillen tussen EU/EEA-casino’s en aanbieders buiten Europa een rol.</p>
+                    <p>In hoofdlijnen geldt dat winsten uit buitenlandse casino’s belastbaar kunnen zijn. Dit geldt met name wanneer de aanbieder buiten de EU of EER valt, zoals bij casino’s die zijn geregistreerd in Costa Rica. De verantwoordelijkheid om winst correct op te geven ligt bij de speler, ongeacht of het casino zelf belasting afdraagt.</p>
 
                     <h2>Hoe kies je een zo veilig mogelijk illegale casino site</h2>
+                    <p>Het kiezen van een illegaal casino vraagt om extra voorzichtigheid. Veel spelers ervaren keuzestress en onzekerheid, omdat er geen vangnet bestaat zoals bij gereguleerde aanbieders. Een betrouwbaar casino herkennen betekent niet dat risico’s verdwijnen, maar wel dat ze beheersbaar blijven.</p>
+                    
+                    <p><strong>Checklist voor het selecteren van een minder risicovolle illegale casino site:</strong></p>
                     <ul>
-                        <li>Controleer of er een geldige buitenlandse licentie wordt vermeld</li>
+                        <li>Controleer of er een geldige buitenlandse licentie wordt vermeld en verifieer deze</li>
                         <li>Zoek naar een consistente reputatie via onafhankelijke reviews</li>
                         <li>Lees bonusvoorwaarden op inzetvereisten en maximale uitbetaling</li>
                         <li>Vermijd extreem hoge of onrealistische bonussen</li>
                         <li>Test of klantenservice bereikbaar en inhoudelijk reageert</li>
+                        <li>Controleer duidelijke regels rond uitbetalingen en verificatie</li>
                     </ul>
-                    <div class="grid md:grid-cols-2 gap-4 my-6">
-                        <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-lg">
-                            <div class="font-bold text-emerald-800 mb-2">Scenario 1: Gecontroleerd</div>
-                            <p class="text-sm m-0">Een speler registreert zich, speelt met een realistische bonus en doorloopt normale KYC bij uitbetaling. De cashout volgt zonder extra eisen.</p>
+
+                    <div class="grid md:grid-cols-2 gap-4 my-8">
+                        <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+                            <h4 class="font-bold text-emerald-800 mb-2">Scenario 1: gecontroleerde uitbetaling</h4>
+                            <p class="text-sm text-emerald-700">Een speler registreert zich, speelt met een realistische bonus en doorloopt normale KYC bij uitbetaling. De cashout volgt zonder extra eisen.</p>
                         </div>
-                        <div class="p-4 bg-red-50 border border-red-100 rounded-lg">
-                            <div class="font-bold text-red-800 mb-2">Scenario 2: Blokkade</div>
-                            <p class="text-sm m-0">Een speler accepteert vage voorwaarden. Bij winst volgen steeds nieuwe documentverzoeken en uiteindelijk een blokkade van de uitbetaling.</p>
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
+                            <h4 class="font-bold text-red-800 mb-2">Scenario 2: vertraging en blokkade</h4>
+                            <p class="text-sm text-red-700">Een speler accepteert vage voorwaarden. Bij winst volgen steeds nieuwe documentverzoeken en uiteindelijk een blokkade van de uitbetaling.</p>
                         </div>
                     </div>
 
-                    <h2>Bonussen bij illegale online casino’s en hun kleine lettertjes</h2>
+                    <h2 id="bonussen">Bonussen bij illegale online casino’s en hun kleine lettertjes</h2>
+                    <p>Bonussen vormen een belangrijk lokmiddel bij illegale aanbieders. Meeste casino’s werken met varianten zoals een welkomstbonus, free spins, cashback of speciale high-rollerdeals. Deze aantrekkelijke bonussen en soms zelfs exclusieve promoties trekken spelers aan die meer flexibiliteit verwachten dan bij gereguleerde sites.</p>
+                    <p>Juist in de voorwaarden schuilt het grootste risico. Inzetvereisten kunnen hoog zijn en regels worden niet altijd duidelijk gecommuniceerd. Spelers ervaren dit vaak pas bij uitbetaling, wanneer winst wordt ingetrokken of beperkt vanwege een overtreden regel.</p>
+                    
+                    <p><strong>Controleer bij bonussen altijd de volgende punten:</strong></p>
                     <ul>
                         <li>Inzetvereisten en hoe deze worden berekend</li>
                         <li>Maximale inzet per spin of ronde tijdens het spelen</li>
@@ -406,6 +537,10 @@
                     </ul>
 
                     <h2>Verantwoord gokken bij een illegale online casino</h2>
+                    <p>Zonder verplicht Cruks-toezicht ligt de verantwoordelijkheid volledig bij de speler. Verantwoord gokken vraagt daarom om bewuste keuzes vóór and tijdens het spelen. Wie buiten het gereguleerde stelsel speelt, mist automatische limieten en interventies, waardoor veilig gokken actief georganiseerd moet worden.</p>
+                    <p>Praktisch betekent dit dat spelers zelf grenzen stellen en signalen serieus nemen. Verantwoord spelen gaat niet over winnen, maar over controle behouden. Merkbare stress, het najagen van verliezen of langer doorspelen dan gepland zijn duidelijke waarschuwingen. In die situaties is stoppen geen zwakte, maar een noodzakelijke stap.</p>
+                    
+                    <p><strong>Concrete zelflimieten die helpen om grip te houden:</strong></p>
                     <ul>
                         <li>Bepaal vooraf een vast speelbudget en wijk daar niet van af</li>
                         <li>Stel een tijdslimiet per sessie in en gebruik een timer</li>
@@ -416,6 +551,9 @@
                     </ul>
 
                     <h2>Waar kun je terecht bij een gokprobleem?</h2>
+                    <p>Een gokprobleem kan iedereen overkomen, ook wanneer er buiten Cruks wordt gespeeld. Verantwoord spelen betekent erkennen wanneer grenzen vervagen en tijdig hulp inschakelen. Stoppen of ondersteuning zoeken blijft altijd een optie, ongeacht waar of hoe iemand speelt.</p>
+                    
+                    <p><strong>Beschikbare hulpopties zijn onder andere:</strong></p>
                     <ul>
                         <li>De huisarts, als eerste aanspreekpunt voor doorverwijzing</li>
                         <li>Anonieme hulplijnen en chatdiensten voor directe ondersteuning</li>
@@ -425,17 +563,79 @@
                     </ul>
 
                     <h2>Trends en casino nieuws over illegale goksites in 2026</h2>
-                    <p>De markt rond illegale goksites blijft in beweging. Casino nieuws laat zien dat vooral crypto-gebaseerde aanbieders terrein winnen. Een andere trend is snelle registratie zonder account. Tegelijk neemt de handhaving door de KSA toe, wat leidt tot blokkades en boetes voor aanbieders die zich specifiek op Nederland richten.</p>
+                    <p>De markt rond illegale goksites blijft in beweging en wordt sterk beïnvloed door technologie en toezicht. Casino nieuws laat zien dat vooral crypto-gebaseerde aanbieders terrein winnen, met snellere transacties en minder traditionele betaalroutes. Dit speelt in op de vraag naar flexibiliteit buiten het gereguleerde kader.</p>
+                    <p>Een andere zichtbare trend is snelle registratie zonder account. Veel buitenlandse online casino's beperken het aantal gegevens bij aanmelding, terwijl verificatie wordt doorgeschoven naar het moment van uitbetaling. Tegelijk verschijnen nieuwe buitenlandse licenties en jurisdicties die proberen zich te positioneren als alternatief voor bestaande toezichthouders.</p>
 
-                    <div id="faq" class="mt-12">
-                        <h2 class="text-3xl font-black mb-8">Veelgestelde vragen</h2>
-                        <div class="faq-item">
-                            <span class="faq-question">Wat is een illegaal online casino?</span>
-                            <p>Een illegaal online casino is een aanbieder zonder Nederlandse vergunning die toch Nederlandse spelers accepteert. Het casino kan elders gereguleerd zijn, maar valt buiten het toezicht in Nederland.</p>
+                    <h2 id="faq">Veelgestelde vragen over illegale online casino’s</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-slate-900">Wat is een illegaal online casino?</h4>
+                            <p class="text-sm">Een illegaal online casino is een aanbieder zonder Nederlandse vergunning die toch Nederlandse spelers accepteert. Het casino kan elders gereguleerd zijn, maar valt buiten het toezicht in Nederland. Daardoor ontbreekt bescherming vanuit de KSA.</p>
                         </div>
-                        <div class="faq-item">
-                            <span class="faq-question">Is spelen bij een illegale casino site strafbaar voor spelers?</span>
-                            <p>Handhaving richt zich vooral op aanbieders, niet op individuele spelers. Toch blijft spelen buiten het gereguleerde kader risicovol, met mogelijke juridische en financiële gevolgen.</p>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Is spelen bij een illegale casino site strafbaar voor spelers?</h4>
+                            <p class="text-sm">Handhaving richt zich vooral op aanbieders, niet op individuele spelers. Toch blijft spelen buiten het gereguleerde kader risicovol, met mogelijke juridische en financiële gevolgen. Zeker bij conflicten is er geen Nederlandse bescherming.</p>
                         </div>
-                        <div class="faq-item">
-                            <
+                        <div>
+                            <h4 class="font-bold text-slate-900">Hoe herken ik betrouwbare illegale goksites?</h4>
+                            <p class="text-sm">Let op transparante voorwaarden, verifieerbare licentie-informatie en consistente uitbetalingen. Een betrouwbaar casino heeft bereikbare klantenservice en een stabiele reputatie op onafhankelijke platforms. Ontbreekt dit, dan neemt het risico toe.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Kan ik spelen bij een casino zonder Cruks als ik in het register sta?</h4>
+                            <p class="text-sm">Een cruks casino met Nederlandse vergunning blokkeert toegang automatisch. Bij buitenlandse aanbieders kan spelen soms nog mogelijk zijn, bijvoorbeeld bij een online casino zonder Cruks of een no cruks casino. Dat betekent wel spelen zonder beschermingsmaatregelen.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Hoe groot is de kans dat een illegale online casino niet uitbetaalt?</h4>
+                            <p class="text-sm">Die kans verschilt per aanbieder en licentie. Bij duidelijke voorwaarden en een goede reputatie is uitbetaling vaak mogelijk, maar garanties ontbreken. Klachten over vertraagde of geweigerde uitbetaling komen vaker voor dan bij legale aanbieders.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900">Moet ik belasting betalen over winsten bij buitenlandse aanbieders?</h4>
+                            <p class="text-sm">Winsten uit buitenlandse casino’s kunnen belastbaar zijn, afhankelijk van vestigingsland en situatie. De verantwoordelijkheid voor correcte aangifte ligt bij de speler. Raadpleeg bij twijfel altijd actuele informatie van de Belastingdienst of een adviseur.</p>
+                        </div>
+                    </div>
+
+                    <h2>Conclusie: spelen bij beste illegale casinos – wel of niet doen?</h2>
+                    <p>Een illegaal casino is een aanbieder zonder Nederlandse licentie die toch toegankelijk is voor Nederlandse spelers. De aantrekkingskracht zit vaak in een casino zonder Cruks, ruimere bonussen en minder directe controles. Daartegenover staan duidelijke nadelen, zoals minder toezicht, onzekerheid bij uitbetalingen en het ontbreken van bescherming.</p>
+                    <p>Voor Nederlandse spelers betekent spelen buiten het gereguleerde stelsel altijd extra afwegingen. Vrijheid en flexibiliteit gaan samen met hogere risico’s, zowel financieel als op het gebied van speelgedrag. Vergeleken met legale KSA-casino’s ontbreekt een vangnet bij conflicten of problemen.</p>
+                    <p>Wie toch kiest voor een casino zonder Cruks, doet er goed aan risico’s actief te beperken. Kritisch vergelijken, voorwaarden lezen en grenzen stellen zijn essentieel. Verantwoord gokken blijft daarbij de basis, ongeacht het type aanbieder.</p>
+                    <p>Uiteindelijk vraagt spelen bij beste illegale casinos om een bewuste keuze. Bij twijfel is niet spelen altijd de veiligste optie.</p>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-12 border-t border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-8 mb-8 grayscale opacity-50">
+                <div class="flex items-center gap-2 border border-slate-700 px-4 py-2 rounded font-black text-xl">18+</div>
+                <div class="flex items-center gap-2 border border-slate-700 px-4 py-2 rounded font-black text-xl uppercase">SSL SECURE</div>
+                <div class="flex items-center gap-2 border border-slate-700 px-4 py-2 rounded font-black text-xl uppercase">BeGambleAware</div>
+            </div>
+            <div class="max-w-4xl mx-auto text-center text-xs leading-relaxed mb-8">
+                <p>Disclaimer: Gambling involves risk. Please only gamble with money you can afford to lose. We are an independent directory and review site. While we receive commissions for referrals, this does not influence our rankings or reviews. All bonuses are subject to terms and conditions.</p>
+            </div>
+            <div class="text-center border-t border-slate-800 pt-8">
+                <div class="font-black text-white text-xl mb-2 tracking-tighter">CASINO<span class="text-emerald-500">PRO</span></div>
+                <p>© 2026 All Rights Reserved. Domain: osfractie.nl</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.onclick = () => { mobileMenu.classList.toggle('hidden') };
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-1');
+                header.classList.remove('py-3');
+            } else {
+                header.classList.add('py-3');
+                header.classList.remove('py-1');
+            }
+        });
+    </script>
+</body>
+</html>
